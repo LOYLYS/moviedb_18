@@ -18,11 +18,13 @@ import edu.ptit.vhlee.moviedb.data.model.Movie;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     private Context mContext;
-    private ArrayList<Movie> mMovies;
+    private final ArrayList<Movie> mMovies;
+    private final ItemClickListener mListener;
 
-    public MovieAdapter(Context mContext) {
+    public MovieAdapter(Context mContext, ItemClickListener listener) {
         this.mContext = mContext;
         this.mMovies = new ArrayList<>();
+        this.mListener = listener;
     }
 
     @NonNull
@@ -30,13 +32,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
         View view = layoutInflater.inflate(R.layout.item_recycler, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.setData(mMovies.get(i));
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        holder.setData(mMovies.get(position));
+        holder.bindView(mMovies.get(position), mListener);
     }
 
     @Override
@@ -54,18 +56,29 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             mTextTitle = itemView.findViewById(R.id.text_movie_name);
         }
 
-        public void setData(Movie movie) {
+        private void setData(Movie movie) {
             mTextTitle.setText(movie.getTitle());
-            String url = movie.getBackdropPath();
-            url.substring(0);
-            String name = Constant.Common.URL_IMGE + url;
             Picasso.with(mContext)
-                    .load(name)
+                    .load(Constant.Common.URL_IMAGE + movie.getBackdropPath())
                     .into(mImageBackdrop);
         }
+
+
+        private void bindView(final Movie movie, final ItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.setListener(movie);
+                }
+            });
+        }
     }
-    public void addData(ArrayList<Movie> movies){
+
+    public void addData(ArrayList<Movie> movies) {
         mMovies.addAll(movies);
         notifyDataSetChanged();
+    }
+    public interface ItemClickListener {
+        void setListener(Object object);
     }
 }

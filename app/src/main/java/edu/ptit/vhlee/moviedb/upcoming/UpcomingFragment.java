@@ -1,5 +1,6 @@
 package edu.ptit.vhlee.moviedb.upcoming;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -44,14 +45,13 @@ public class UpcomingFragment extends Fragment implements MovieContract.View {
     public void getDataPage() {
         int pageNum = 0;
         while (pageNum < Constant.Common.TOTAL_PAGE) {
-            mMoviePresenter.getUpcommingMovies(String.format
-                    (Constant.Url.URL, Constant.Common.TYPE_UPCOMING, Constant.Common.LANGUAGE_ENG
-                            , String.valueOf(++pageNum)));
+            mMoviePresenter.getMovies(String.format(Constant.Url.URL,
+                    Constant.Common.TYPE_UPCOMING,
+                    Constant.Common.LANGUAGE_ENG, ++pageNum));
         }
     }
 
     public void initAdapter() {
-        mMovieAdapter = new MovieAdapter(getActivity());
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(getActivity(), Constant.Common.NUM_SPAN);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -66,6 +66,10 @@ public class UpcomingFragment extends Fragment implements MovieContract.View {
     @Override
     public void showSuccess(ArrayList<Movie> movies) {
         mMovieAdapter.addData(movies);
+    }
+
+    @Override
+    public void showMovie(Movie movie) {
     }
 }
 

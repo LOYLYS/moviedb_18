@@ -6,11 +6,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="ItemMenu" parent="TextAppearance.Design.HelperText">
+    <!--item menu navigation style-->
+    <style name="ItemDrawerMenu" parent="TextAppearance.Design.HelperText">
         <item name="android:layout_marginLeft">@dimen/dp_30</item>
         <item name="android:layout_marginTop">@dimen/dp_10</item>
         <item name="android:layout_marginBottom">@dimen/dp_10</item>
         <item name="android:layout_marginRight">@dimen/dp_30</item>
         <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="ButtonSmallStyle" parent="Base.Widget.AppCompat.ActionButton">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:layout_margin">@dimen/dp_5</item>
+        <item name="android:padding">@dimen/dp_5</item>
     </style>
 </resources>

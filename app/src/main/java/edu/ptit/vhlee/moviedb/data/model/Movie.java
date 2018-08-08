@@ -12,7 +12,7 @@ public class Movie implements Serializable {
     private String mReleaseDate;
     private String mOverView;
 
-    private Movie(Builder builder) {
+    public Movie(Builder builder) {
         mVoteCount = builder.mVoteCount;
         mId = builder.mId;
         mVoteAverage = builder.mVoteAverage;

@@ -16,27 +16,54 @@ public class MoviePresenter implements MovieContract.Presenter {
     }
 
     @Override
-    public ArrayList<Movie> getUpcommingMovies(String url) {
-        return mMovieRepository.getMovies(url, new MovieDataSource.Callback() {
-            @Override
-            public void onStart() {
+    public ArrayList<Movie> getMovies(String url) {
+        return mMovieRepository.getMoviesFromRepo(url,
+                new MovieDataSource.Callback<ArrayList<Movie>>() {
+                    @Override
+                    public void onStart() {
 
-            }
+                    }
 
-            @Override
-            public void onSuccess(Object data) {
-                mView.showSuccess((ArrayList<Movie>) data);
-            }
+                    @Override
+                    public void onSuccess(ArrayList<Movie> movies) {
+                        mView.showSuccess(movies);
+                    }
 
-            @Override
-            public void onFail(Exception exception) {
+                    @Override
+                    public void onFail(Exception exception) {
 
-            }
+                    }
 
-            @Override
-            public void onComplete() {
+                    @Override
+                    public void onComplete() {
 
-            }
-        });
+                    }
+                });
+    }
+
+    @Override
+    public Movie getMovieDetail(String url) {
+        return mMovieRepository.getMovieDetailFromRepo(url,
+                new MovieDataSource.Callback<Movie>() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Movie movie) {
+                        mView.showMovie(movie);
+                    }
+
+                    @Override
+                    public void onFail(Exception exception) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

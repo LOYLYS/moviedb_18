@@ -6,6 +6,9 @@
     <string name="title_now_playing">Now Playing</string>
     <string name="title_upcoming">Upcoming</string>
     <string name="title_genres">Genres</string>
+    <string name="title_detail">Detail</string>
+    <string name="title_actor">Actor</string>
+    <string name="title_genre">Genre</string>
     <string name="text_home">Home</string>
     <string name="text_favorites">Favorites</string>
     <string name="text_settings">Settings</string>
@@ -14,5 +17,9 @@
     <string name="text_movie_name">Movie</string>
     <string name="text_categories">Categories</string>
     <string name="text_search">Search</string>
+    <string name="add_favorite">Add favorite</string>
+    <string name="remove_favorite">Remove favorite</string>
     <string name="version">Version 1.0.0</string>
+    <string name="text_trailer">Trailer</string>
+    <string name="default_value">null</string>
 </resources>
